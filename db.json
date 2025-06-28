@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "name": "Admin",
+            "role": "admin",
+            "photoUrl": "https://example.com/admin.jpg",
+            "password": "admin123"
+        },
+        {
+            "id": "2",
+            "name": "Regular User",
+            "role": "user",
+            "photoUrl": "https://example.com/user.jpg",
+            "password": "user123"
+        }
+    ]
+}

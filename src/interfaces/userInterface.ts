@@ -1,7 +1,8 @@
 export interface User {
   id: string;
   name: string;
-  isAdmin: boolean;
+  role: string;
   photoUrl: string;
+  password: string;
 }
 
