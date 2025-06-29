@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getUser } from "../services/Auth";
+import { getUser } from "../services/Users";
 import { useAuth } from "../contexts/authContext";
+import { t } from "i18next";
 
 export const useLogin = () => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
@@ -24,13 +25,13 @@ export const useLogin = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, "El nombre de usuario menos de 3 dígitos")
-        .max(50, "El nombre de usuario debe tener menos de 50 dígitos")
-        .required("Nombre de usuario requerido"),
+        .min(3, t("validation.usernameMin"))
+        .max(50, t("validation.usernameMax"))
+        .required(t("validation.required")),
       password: Yup.string()
-        .min(6, "La contraseña debe tener al menos 6 dígitos")
-        .max(50, "La contraseña debe tener menos de 50 dígitos")
-        .required("Contraseña requerida"),
+        .min(6, t("validation.passwordMin"))
+        .max(50, t("validation.passwordMax"))
+        .required(t("validation.required")),
     }),
     onSubmit: async (values) => {
       try {
@@ -38,13 +39,13 @@ export const useLogin = () => {
         if (user.length > 0) {
           setUser(user[0]);
           setToken(user[0].token);
-          login(true);
+          login(user[0].rolelogin === "admin");
           goToDashboard();
         } else {
           setOpenSnackBar(true);
         }
       } catch (error) {
-        console.error("No se encontro el usuario", error);
+        console.error(t("LoginPage.error"), error);
         setOpenSnackBar(true);
       }
     },

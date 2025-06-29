@@ -21,11 +21,7 @@ Estas historias están pensadas para ser desarrolladas **por un estudiante de ma
 
 -   No se requiere autenticación avanzada con contraseña.
 
--   Context gestiona la sesión del usuario activo.
-
 -   El rol (usuario o admin) se define al momento del registro mediante una opción de selección.
-
--   Si el rol es admin, se habilita el acceso al panel de administración con protección de ruta (Guards).
 
 -   Los usuarios y sus roles se mantienen persistentes en JSON Server (/usuarios.json).
 

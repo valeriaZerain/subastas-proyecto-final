@@ -8,8 +8,13 @@ import {
   Toolbar,
   Divider,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import GavelIcon from '@mui/icons-material/Gavel';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
+import { t } from "i18next";
 
 const drawerWidth = 240;
 
@@ -25,7 +30,7 @@ const Sidebar = ({
   isMobile,
 }: SidebarProps) => {
   const location = useLocation();
-  const { logout } = useAuth();
+  const { isAdmin } = useAuth();
   const drawer = (
     <div>
       <Toolbar />
@@ -34,28 +39,58 @@ const Sidebar = ({
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/"
-            selected={location.pathname === "/"}
+            to="/home"
+            selected={location.pathname === "/home"}
           >
             <ListItemIcon>
+              <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Proyectos" />
+            <ListItemText primary={t('Layout.home')} />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/login"
-            onClick={() => {
-              logout();
-            }}
+            to="/auction"
+            selected={location.pathname === "/auction"}
           >
             <ListItemIcon>
+              <GavelIcon />
             </ListItemIcon>
-            <ListItemText primary="Cerrar sesión" />
+            <ListItemText primary={t('Layout.auction')} />
           </ListItemButton>
         </ListItem>
+
+        {isAdmin && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                to="/admin/admin-panel"
+                selected={location.pathname === "/admin/admin-panel"}
+              >
+                <ListItemIcon>
+                  <AdminPanelSettingsIcon/>
+                </ListItemIcon>
+                <ListItemText primary={t('Layout.admin')} />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                to="/admin/user-management"
+                selected={location.pathname === "/admin/user-management"}
+              >
+                <ListItemIcon>
+                  <PeopleAltIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('Layout.users')} />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
       </List>
     </div>
   );

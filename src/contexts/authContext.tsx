@@ -17,12 +17,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const {user} = useAuthStore( state => state)
+  const {user, resetAuth} = useAuthStore( state => state)
 
   useEffect(() => {
     if(user && user.role)
       login(user.role === "admin")
-  }, [])
+  }, [user]);
 
   const login = (loginIsAdmin: boolean) => {
     setIsAuth(true);
@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
+    resetAuth();
     setIsAuth(false);
     setIsAdmin(false);
   };

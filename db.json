@@ -9,7 +9,14 @@
         },
         {
             "id": "2",
-            "name": "Regular User",
+            "name": "Regular",
+            "role": "user",
+            "photoUrl": "https://example.com/user.jpg",
+            "password": "user123"
+        },
+        {
+            "id": "3",
+            "name": "User",
             "role": "user",
             "photoUrl": "https://example.com/user.jpg",
             "password": "user123"

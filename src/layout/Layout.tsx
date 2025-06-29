@@ -1,5 +1,5 @@
 import {
-  Box,  
+  Box,
   CssBaseline,
   Toolbar,
   useMediaQuery,
@@ -21,20 +21,22 @@ export const Layout = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-
+      <Navbar onMenuClick={handleDrawerToggle} />
       <Sidebar
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         isMobile={isMobile}
       />
-
-      <Box sx={{ flexGrow: 1 }}>
-        <Navbar onMenuClick={handleDrawerToggle} />
-        <Box component="main" sx={{ p: 3 }}>
-          <Toolbar />
-          <Outlet />
-        </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          width: { sm: `calc(100% - 240px)` },
+          p: 3,
+        }}
+      >
+        <Toolbar />
+        <Outlet />
       </Box>
     </Box>
   );
