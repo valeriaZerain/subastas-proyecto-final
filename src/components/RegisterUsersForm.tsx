@@ -1,38 +1,68 @@
-import { Box } from "@mui/material";
-interface RegisterUsersProps {
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Stack from "@mui/material/Stack";
+import { t } from "i18next";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+interface CustomDialogsProps {
   open: boolean;
+  title: string;
   onClose: () => void;
+  children: React.ReactNode;
+  onSubmit: () => void;
 }
 
-export const RegisterUsers = ({ open, onClose }: RegisterUsersProps) => {
-    return (
-        <Box
-            sx={{
-                display: open ? "block" : "none",
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                zIndex: 1000,
-            }}
-            onClick={onClose}
+export const RegisterUsers = ({
+  onClose,
+  open,
+  title,
+  children,
+  onSubmit,
+}: CustomDialogsProps) => {
+  return (
+    <BootstrapDialog
+      onClose={onClose}
+      open={open}
+    >
+      <form
+        onSubmit={onSubmit}
+      >
+        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          {title}
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={(theme) => ({
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: theme.palette.grey[500],
+          })}
         >
-            <Box
-                sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    backgroundColor: "#fff",
-                    padding: 4,
-                    borderRadius: 2,
-                    boxShadow: 24,
-                }}
-                onClick={(e) => e.stopPropagation()}
-            >
-            </Box>
-        </Box>
-    )
-}
+          <CloseIcon />
+        </IconButton>
+        <DialogContent dividers>
+          <Stack spacing={2}>{children}</Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button type="submit">{t("userManagement.addUser")}</Button>
+        </DialogActions>
+      </form>
+    </BootstrapDialog>
+  );
+};

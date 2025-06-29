@@ -32,6 +32,11 @@ export const enJSON = {
         addUser: "Add User",
         userAdded: "User added successfully",
         userUpdated: "User updated successfully",
-        userDeleted: "User deleted successfully"
+        userDeleted: "User deleted successfully",
+        registerUserTitle: "Register User",
+        password: "Password",
+        admin: "Admin",
+        user: "User",
+        photo: "Upload Photo",
     },
 };

@@ -32,6 +32,11 @@ export const esJSON = {
         addUser: "Agregar Usuario",
         userAdded: "Usuario agregado exitosamente",
         userUpdated: "Usuario actualizado exitosamente",
-        userDeleted: "Usuario eliminado exitosamente"
+        userDeleted: "Usuario eliminado exitosamente",
+        registerUserTitle: "Registrar Usuario",
+        password: "Contraseña",
+        admin: "Administrador",
+        user: "Usuario",
+        photo: "Subir Foto",
     }
 };

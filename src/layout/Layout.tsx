@@ -1,6 +1,5 @@
 import {
   Box,
-  CssBaseline,
   Toolbar,
   useMediaQuery,
   useTheme,

@@ -26,15 +26,16 @@ export const getUsers = async () => {
 };
 
 export const registerUser = async (
-  userName: string,
+  name: string,
   password: string,
   role: string,
   photoUrl: string,
 ) => {
   try {
+    debugger;
     const response = await jsonServerInstance.post(USERS_URL, {
       id: uuidv4(),
-      userName,
+      name,
       password,
       role,
       photoUrl

@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { useState, type ChangeEvent } from "react";
@@ -23,13 +22,11 @@ interface Column {
 
 interface UsersListProps {
   users: User[];
-  editUser: (user: User) => void;
   deleteUser: (userId: string) => void;
 }
 
 export default function UsersList({
   users,
-  editUser,
   deleteUser,
 }: UsersListProps) {
   const [page, setPage] = useState(0);
@@ -99,14 +96,6 @@ export default function UsersList({
                     <TableCell align="left">{user.role}</TableCell>
                     <TableCell align="left">
                       <Box sx={{ display: "flex", gap: { xs: 0.5, sm: 1 } }}>
-                        <IconButton
-                          onClick={() => editUser(user)}
-                          aria-label="edit"
-                          size="small"
-                          color="primary"
-                        >
-                          <EditIcon />
-                        </IconButton>
                         <IconButton
                           onClick={() => deleteUser(user.id)}
                           aria-label="delete"

@@ -19,7 +19,6 @@ Estas historias están pensadas para ser desarrolladas **por un estudiante de ma
 
 -   Registro simple con nombre de usuario y avatar (opcional pts extras para el avatar).
 
--   No se requiere autenticación avanzada con contraseña.
 
 -   El rol (usuario o admin) se define al momento del registro mediante una opción de selección.
 
