@@ -126,7 +126,6 @@ const Actions = ({ onClick }: { onClick: () => void }) => {
         size="small"
         variant="outlined"
         onClick={onClick}
-        disabled={auction.status === "finished"}
       >
         {t("auction.go")}
       </Button>

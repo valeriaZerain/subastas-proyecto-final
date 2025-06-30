@@ -13,19 +13,10 @@ export const AuctionTimer = ({ auction, onStatusChange }: AuctionTimerProps) => 
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const timerRef = useRef<NodeJS.Timeout>();
 
-  // Función de cálculo robusta con validación UTC
   const calculateTimeLeft = (): number => {
     const now = Date.now();
     const start = new Date(startTime).getTime();
     const end = start + (duration * 1000);
-    
-    // Debug esencial
-    console.log('Tiempos calculados:', {
-      ahora: new Date(now).toISOString(),
-      inicio: new Date(start).toISOString(),
-      fin: new Date(end).toISOString(),
-      segundosRestantes: Math.floor((end - now) / 1000)
-    });
 
     return Math.max(0, Math.floor((end - now) / 1000));
   };

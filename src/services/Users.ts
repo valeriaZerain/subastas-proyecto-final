@@ -32,7 +32,6 @@ export const registerUser = async (
   photoUrl: string,
 ) => {
   try {
-    debugger;
     const response = await jsonServerInstance.post(USERS_URL, {
       id: uuidv4(),
       name,

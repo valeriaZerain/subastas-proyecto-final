@@ -30,9 +30,9 @@
       "description": "Patito de hule que te ayudara a ser el mejor programador.",
       "basePrice": 999,
       "currentBid": 1050,
-      "startTime": "2025-06-30T04:20:00Z",
+      "startTime": "2025-06-30T04:25:00Z",
       "duration": 300,
-      "status": "actual"
+      "status": "finished"
     },
     {
       "id": "2",

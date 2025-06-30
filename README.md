@@ -42,22 +42,6 @@ para poder revisar mis actividades pasadas.
 -   Se registra el historial de pujas por producto, incluyendo usuario, hora y monto.
 
 
-### US4: Gestión de Productos (Administrador)
-
-Como administrador,
-quiero crear, editar y eliminar productos de subasta,
-para poder gestionar qué artículos están disponibles.
-
--   CRUD completo de productos desde un panel exclusivo para el administrador.
-
--   Protegido mediante Context y guards de ruta.
-
--   CRUD completo de productos de subasta: crear, editar, eliminar.
-
--   Se almacena en products.json (JSON-server)
-
--   Los administradores pueden ser definidos estáticamente o mediante un CRUD de usuarios.
-
 ## Requerimientos Técnicos
 
 -   Hooks y Estado
@@ -120,9 +104,8 @@ para poder gestionar qué artículos están disponibles.
 
 | Día | Actividades principales                                                              |
 | --- | ------------------------------------------------------------------------------------ |
-| 2   | - Implementar US1 (lista de productos + cronómetro)- CRUD de productos (US4)         |
 | 3   | - Implementar lógica de pujas (US2)- Simulación SSE- Validaciones de oferta          |
-| 4   | - Historial por usuario (US3)- CRUD de usuarios con guard (US5)                      |
+| 4   | - Historial por usuario (US3)                                                        |
 | 5   | - Estilizar con MUI- Agregar i18n + ErrorBoundary- README + video + revisión final   |
 
 

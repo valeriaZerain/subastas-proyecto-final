@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Typography, Box, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Grid
+} from "@mui/material";
 import { useAuctionStore } from "../store/auctionStore";
 import type { Auction } from "../interfaces/auctionInterface";
-import { t } from "i18next";
+import { AuctionDetails } from "../components/AuctionDetail";
+import { Bid } from "../components/Bid";
 
 function AuctionRoomPage() {
   const { id } = useParams<{ id: string }>();
@@ -30,47 +35,16 @@ function AuctionRoomPage() {
   }
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        {auction.title}
-      </Typography>
-      <Box
-        component="img"
-        src={auction.image}
-        alt={auction.title}
-        sx={{ width: "100%", maxHeight: 400, objectFit: "cover", mb: 2 }}
-      />
-      <Typography variant="body1" sx={{ mb: 2 }}>
-        {auction.description}
-      </Typography>
-
-      <Typography variant="h6">
-        {auction.status === "finished"
-          ? t("auction.finalPrice")
-          : auction.status === "actual"
-          ? t("auction.currentBid")
-          : t("auction.basePrice")}
-        : ${auction.currentBid || auction.basePrice}
-      </Typography>
-
-      <Typography variant="body2" sx={{ mt: 1 }}>
-        {t("auction.status")}: {auction.status}
-      </Typography>
-
-      <Typography variant="body2">
-        {t("auction.startTime")}: {new Date(auction.startTime).toLocaleString()}
-      </Typography>
-
-      <Typography variant="body2">
-        {t("auction.duration")}: {auction.duration}s
-      </Typography>
-
-      {auction.status !== "finished" && (
-        <Button variant="contained" sx={{ mt: 3 }}>
-          {t("auction.placeBid")}
-        </Button>
-      )}
-    </Container>
+    <Container sx={{ mt: 4, mb: 4 }}>
+    <Grid container spacing={3}>
+      <Grid item xs={12} md={8}>
+        <AuctionDetails auction={auction} />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Bid/>
+      </Grid>
+    </Grid>
+  </Container>
   );
 }
 
