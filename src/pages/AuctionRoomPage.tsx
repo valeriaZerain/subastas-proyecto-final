@@ -1,19 +1,17 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Container,
   Typography,
   Grid
 } from "@mui/material";
 import { useAuctionStore } from "../store/auctionStore";
-import type { Auction } from "../interfaces/auctionInterface";
 import { AuctionDetails } from "../components/AuctionDetail";
 import { Bid } from "../components/Bid";
 
 function AuctionRoomPage() {
   const { id } = useParams<{ id: string }>();
-  const { auctions, fetchAuctions } = useAuctionStore();
-  const [auction, setAuction] = useState<Auction | null>(null);
+  const { auctions, fetchAuctions, selectedAuction, setSelectedAuction } = useAuctionStore();
 
   useEffect(() => {
     fetchAuctions();
@@ -22,11 +20,11 @@ function AuctionRoomPage() {
   useEffect(() => {
     if (id && auctions.length > 0) {
       const found = auctions.find((a) => a.id === id);
-      setAuction(found ?? null);
+      setSelectedAuction(found ?? null);
     }
   }, [id, auctions]);
 
-  if (!auction) {
+  if (!selectedAuction) {
     return (
       <Container>
         <Typography variant="h6">Cargando subasta...</Typography>
@@ -37,10 +35,10 @@ function AuctionRoomPage() {
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
     <Grid container spacing={3}>
-      <Grid item xs={12} md={8}>
-        <AuctionDetails auction={auction} />
+      <Grid size={{ xs: 2, md: 6 }}>
+        <AuctionDetails />
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid size={{ xs: 2, md: 6 }}>
         <Bid/>
       </Grid>
     </Grid>

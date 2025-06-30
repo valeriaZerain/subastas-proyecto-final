@@ -64,4 +64,14 @@ export const deleteUser = async (userId: string) => {
     console.error("Error deleting user", error);
     throw error;
   }
+};
+
+export const getUserById = async (userId: string) => {
+  try {
+    const response = await jsonServerInstance.get(`${USERS_URL}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting user by ID", error);
+    throw error;
+  }
 }

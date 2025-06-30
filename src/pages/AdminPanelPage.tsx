@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   TextField,
-  Select,
-  MenuItem,
   Avatar,
 } from "@mui/material";
 import { t } from "i18next";
@@ -29,6 +27,7 @@ function AdminPanelPage() {
     handleEditAuction,
     handleOpenAlert,
   } = useAuction();
+
   return (
     <Container sx={{ ml: 0, mr: 0 }}>
       <AlertDialog
@@ -152,19 +151,6 @@ function AdminPanelPage() {
         <Typography variant="body2" sx={{ mb: 1 }}>
           {t("auction.status")}
         </Typography>
-        <Select
-          fullWidth
-          id="status"
-          name="status"
-          value={formik.values.status}
-          onChange={formik.handleChange}
-          error={formik.touched.status && Boolean(formik.errors.status)}
-          sx={{ mb: 2 }}
-        >
-          <MenuItem value="coming">{t("auction.statusComing")}</MenuItem>
-          <MenuItem value="actual">{t("auction.statusActual")}</MenuItem>
-          <MenuItem value="finished">{t("auction.statusFinished")}</MenuItem>
-        </Select>
       </RegisterUsers>
       <AuctionList
         auctions={auctions}

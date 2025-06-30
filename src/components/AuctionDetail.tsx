@@ -1,29 +1,63 @@
 import {
   Typography,
   Box,
-  Button,
   Grid,
   Chip,
   Stack,
   CardMedia,
+  Container,
 } from "@mui/material";
-import type {Auction} from "../interfaces/auctionInterface";
-import {t} from "i18next";
+import { t } from "i18next";
+import { useAuctionStore } from "../store/auctionStore";
+import { AuctionTimer } from "./Timer";
 
-interface AuctionProps {
-    auction: Auction;
-}
-export const AuctionDetails = ({auction} : AuctionProps) => {
+export const AuctionDetails = () => {
+  const { selectedAuction } = useAuctionStore();
+  if (!selectedAuction) {
+    return (
+      <Container
+        maxWidth="md"
+        sx={{
+          height: "80vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          {t("auction.noAuctionSelected") || "No auction selected."}
+        </Typography>
+      </Container>
+    );
+  }
   return (
-    <div>
+    <Container
+      maxWidth="md"
+      sx={{
+        height: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        pb: 1,
+      }}
+    >
       <Typography
         variant="h4"
         gutterBottom
         sx={{ fontWeight: "bold", color: "primary.main" }}
       >
-        {auction.title}
+        {selectedAuction.title}
       </Typography>
-
+      {selectedAuction.status === "actual" && (
+        <AuctionTimer
+          auction={selectedAuction}
+          onStatusChange={(newStatus) => {
+            useAuctionStore.getState().setSelectedAuction({
+              ...selectedAuction,
+              status: newStatus,
+            });
+          }}
+        />
+      )}
       <Typography
         variant="body1"
         sx={{
@@ -32,7 +66,7 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
           borderRadius: 1,
         }}
       >
-        {auction.description}
+        {selectedAuction.description}
       </Typography>
 
       <Box
@@ -47,16 +81,16 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
         <Stack spacing={2}>
           <CardMedia
             component="img"
-            height="400"
-            image={auction.image || "/static/images/placeholder.png"}
-            alt={auction.title}
+            height="200"
+            image={selectedAuction.image || "/static/images/placeholder.png"}
+            alt={selectedAuction.title}
             sx={{
               borderRadius: 2,
               mb: 3,
               width: "100%",
             }}
           />
-          <Grid item xs={12}>
+          <Grid sx={{ xs: 12 }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
                 variant="subtitle1"
@@ -66,19 +100,19 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
                   color: "text.secondary",
                 }}
               >
-                {auction.status === "finished"
+                {selectedAuction.status === "finished"
                   ? t("auction.finalPrice")
-                  : auction.status === "actual"
+                  : selectedAuction.status === "actual"
                   ? t("auction.currentBid")
                   : t("auction.basePrice")}
                 :
               </Typography>
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                ${auction.currentBid || auction.basePrice}
+                ${selectedAuction.currentBid || selectedAuction.basePrice}
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid sx={{ xs: 12, sm: 6 }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
                 variant="body2"
@@ -90,11 +124,11 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
                 {t("auction.status")}:
               </Typography>
               <Chip
-                label={auction.status}
+                label={selectedAuction.status}
                 color={
-                  auction.status === "finished"
+                  selectedAuction.status === "finished"
                     ? "success"
-                    : auction.status === "actual"
+                    : selectedAuction.status === "actual"
                     ? "primary"
                     : "default"
                 }
@@ -102,7 +136,7 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid sx={{ xs: 12, sm: 6 }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
                 variant="body2"
@@ -114,11 +148,11 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
                 {t("auction.startTime")}:
               </Typography>
               <Typography variant="body2">
-                {new Date(auction.startTime).toLocaleString()}
+                {new Date(selectedAuction.startTime).toISOString().slice(0, 19).replace("T", " ")}
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid sx={{ xs: 12, sm: 6 }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
                 variant="body2"
@@ -130,27 +164,13 @@ export const AuctionDetails = ({auction} : AuctionProps) => {
                 {t("auction.duration")}:
               </Typography>
               <Typography variant="body2">
-                {Math.floor(auction.duration / 3600)}h{" "}
-                {Math.floor((auction.duration % 3600) / 60)}m
+                {Math.floor(selectedAuction.duration / 3600)}h{" "}
+                {Math.floor((selectedAuction.duration % 3600) / 60)}m
               </Typography>
             </Box>
           </Grid>
         </Stack>
       </Box>
-
-      {auction.status !== "finished" && (
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            mt: 2,
-            px: 4,
-            fontWeight: "bold",
-          }}
-        >
-          {t("auction.placeBid")}
-        </Button>
-      )}
-    </div>
+    </Container>
   );
 };

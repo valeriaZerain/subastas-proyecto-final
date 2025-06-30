@@ -1,6 +1,6 @@
 import jsonServerInstance from "../api/jsonServerInstance";
-import { v4 as uuidv4 } from 'uuid';
 import type { Bid } from "../interfaces/bidInterface";
+import { getUserById } from "./Users";
 const BID_URL = "bids";
 
 export const getBids = async (auctionId: string) => {
@@ -16,8 +16,7 @@ export const getBids = async (auctionId: string) => {
 export const createBid = async (bid: Bid) => {
   try {
     const response = await jsonServerInstance.post(BID_URL, {
-      ...bid,
-      id: uuidv4(),
+      ...bid
     });
     return response.data;
   } catch (error) {
@@ -29,9 +28,20 @@ export const createBid = async (bid: Bid) => {
 export const getUserBids = async (userId: string) => {
   try {
     const response = await jsonServerInstance.get(`${BID_URL}?userId=${userId}`);
-    return response.data;
+    const bids = response.data;
+    const user = await getUserById(userId);
+
+    const enrichedBids = bids.map((bid: any) => ({
+      ...bid,
+      user: {
+        id: user.id,
+        name: user.name,
+      },
+    }));
+
+    return enrichedBids;
   } catch (error) {
     console.error("Error getting user bids", error);
     throw error;
   }
-}
+};

@@ -1,43 +1,48 @@
 import { useEffect, useState, useRef } from "react";
 import { Box, LinearProgress, Typography } from "@mui/material";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import type { Auction } from "../interfaces/auctionInterface";
 
 interface AuctionTimerProps {
   auction: Auction;
-  onStatusChange: (newStatus: Auction['status']) => void;
+  onStatusChange: (newStatus: Auction["status"]) => void;
 }
 
-export const AuctionTimer = ({ auction, onStatusChange }: AuctionTimerProps) => {
+export const AuctionTimer = ({
+  auction,
+  onStatusChange,
+}: AuctionTimerProps) => {
   const { startTime, duration, status } = auction;
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const timerRef = useRef<NodeJS.Timeout>();
 
   const calculateTimeLeft = (): number => {
     const now = Date.now();
-    const start = new Date(startTime).getTime();
-    const end = start + (duration * 1000);
+
+    const FOUR_HOURS = 4 * 60 * 60 * 1000; 
+    const start = new Date(startTime).getTime() + FOUR_HOURS;
+    const end = start + duration * 1000;
 
     return Math.max(0, Math.floor((end - now) / 1000));
   };
 
   useEffect(() => {
-    if (status !== 'actual') return;
+    if (status !== "actual") return;
 
     const initialTimeLeft = calculateTimeLeft();
     setTimeLeft(initialTimeLeft);
 
     if (initialTimeLeft <= 0) {
-      onStatusChange('finished');
+      onStatusChange("finished");
       return;
     }
 
     timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         const newTime = prev - 1;
         if (newTime <= 0) {
           clearInterval(timerRef.current);
-          onStatusChange('finished');
+          onStatusChange("finished");
           return 0;
         }
         return newTime;
@@ -52,22 +57,31 @@ export const AuctionTimer = ({ auction, onStatusChange }: AuctionTimerProps) => 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
-  if (status !== 'actual') return null;
+  if (status !== "actual") return null;
 
   return (
-    <Box sx={{ 
-      width: '100%', 
-      px: 2, 
-      mt: 1, 
-      mb: 2,
-      backgroundColor: 'rgba(0,0,0,0.05)',
-      borderRadius: 1,
-      py: 1
-    }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+    <Box
+      sx={{
+        width: "100%",
+        px: 2,
+        mt: 1,
+        mb: 2,
+        backgroundColor: "rgba(0,0,0,0.05)",
+        borderRadius: 1,
+        py: 1,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 1,
+        }}
+      >
         <AccessTimeIcon fontSize="small" color="primary" />
         <Typography variant="body2" fontWeight="bold" color="text.primary">
           {formatTime(timeLeft)}
@@ -76,16 +90,16 @@ export const AuctionTimer = ({ auction, onStatusChange }: AuctionTimerProps) => 
       <LinearProgress
         variant="determinate"
         value={(timeLeft / duration) * 100}
-        color={timeLeft > duration * 0.3 ? 'primary' : 'error'}
+        color={timeLeft > duration * 0.3 ? "primary" : "error"}
         sx={{
           mt: 1,
           height: 8,
           borderRadius: 4,
-          width: '90%',
-          mx: 'auto',
-          '& .MuiLinearProgress-bar': {
+          width: "90%",
+          mx: "auto",
+          "& .MuiLinearProgress-bar": {
             borderRadius: 4,
-          }
+          },
         }}
       />
     </Box>

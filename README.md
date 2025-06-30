@@ -6,15 +6,11 @@ Como usuario registrado,
 quiero poder ofertar en productos activos,
 para intentar ganar la subasta.
 
--   La oferta debe ser mayor al valor actual para ser válida.
 
 -   Las pujas se actualizan en tiempo real para todos los usuarios conectados (simulado con SSE).
 
--   Si una oferta no es válida, se notifica al usuario con una alerta.
-
 -   Al finalizar el cronómetro, se muestra el ganador y el monto final.
 
--   Cada usuario puede ofertar una cantidad mayor al precio actual.
 ![alt text](image-1.png)
 
 ![alt text](image-2.png)
@@ -25,21 +21,13 @@ Como usuario registrado,
 quiero ver el historial de mis subastas y las ofertas realizadas,
 para poder revisar mis actividades pasadas.
 
--   El sistema registra quién ofertó, cuánto y cuándo.
-
 -   Se muestra el ganador y estadísticas luego de cada subasta.
-
--   Los usuarios pueden revisar el historial completo de subastas anteriores.
-
--   Se registra el historial de pujas por producto, incluyendo usuario, hora y monto.
 
 ## Requerimientos Técnicos
 
 -   Hooks y Estado
 
 -   Zustand: para manejar el estado global de subastas y pujas
-
--   useEffect + useRef: para temporizador de subasta y actualizaciones
 
 -   useMemo, useCallback: para lógica de pujas eficientes
 
@@ -48,8 +36,6 @@ para poder revisar mis actividades pasadas.
 -   Manejo de instancias para el json-server y el sse
 
 ### UI
-
--   Snackbar para confirmaciones o errores
 
 -   Render Props para cada ítem subastado
 

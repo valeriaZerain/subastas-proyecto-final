@@ -1,7 +1,7 @@
 import jsonServerInstance from "../api/jsonServerInstance";
 import { v4 as uuidv4 } from "uuid";
 import type { Auction } from "../interfaces/auctionInterface";
-import { getUserBids } from "./Bid";
+import { getUserBids } from "./BidServices";
 const AUCTION_URL = "auctions";
 
 export const getAuctions = async () => {

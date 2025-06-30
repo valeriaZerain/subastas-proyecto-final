@@ -12,7 +12,9 @@ export const enJSON = {
         usernameMax: "The username must be less than 50 characters long",
         passwordMin: " The password must be at least 6 characters long",
         passwordMax: "The password must be less than 50 characters long",
-        required: "This field is required"
+        required: "This field is required",
+        bidrequired: "Bid amount is required",
+        bidmin: "The minimum bid must be at least "
     },
     "Layout": {
         profile: "Profile",
@@ -79,5 +81,14 @@ export const enJSON = {
         auction: "Auction",
         amount: "Amount",
         time: "Time"
+    },
+    "Bid":{
+        title: "Bids",
+        amount: "Amount",
+        userId: "User ID",
+        time: "Time",
+        noBids: "No bids available for this auction",
+        submit: "Submit Bid",
+        succesed: "Bid placed successfully",
     }
 };

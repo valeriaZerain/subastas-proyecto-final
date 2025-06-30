@@ -4,4 +4,8 @@ export interface Bid {
     userId: string;
     amount: number;
     timestamp: Date;
+    user?: {
+        id: string;
+        name: string;
+    };
 }

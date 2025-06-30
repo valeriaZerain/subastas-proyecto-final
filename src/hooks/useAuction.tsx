@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { useAuctionStore } from "../store/auctionStore";
 import type { Auction } from "../interfaces/auctionInterface";
-import { deleteAuction, updateAuction, registerAuction } from "../services/Auction";
+import {
+  deleteAuction,
+  updateAuction,
+  registerAuction,
+} from "../services/Auction";
 
 export const useAuction = () => {
   const [openAlert, setOpenAlert] = useState(false);
@@ -31,6 +35,11 @@ export const useAuction = () => {
   const handleCloseRegisterAuction = () => {
     setOpenRegisterAuction(false);
   };
+  const localToUTC = (dateString: string) => {
+  const localDate = new Date(dateString);
+  const utcDate = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000);
+  return utcDate;
+};
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -47,7 +56,9 @@ export const useAuction = () => {
       basePrice: Yup.number()
         .min(0, "Price must be positive")
         .required("Price is required"),
-      startTime: Yup.date().required("Start time is required").min(new Date(), "Start time must be in the future"),
+      startTime: Yup.date()
+        .required("Start time is required")
+        .min(new Date(), "Start time must be in the future"),
       duration: Yup.number()
         .min(1, "Duration must be at least 1 second")
         .required("Duration is required"),
@@ -58,41 +69,39 @@ export const useAuction = () => {
       ),
     }),
     onSubmit: async (values) => {
-          try {
-            if (editingAuction) {
-              await updateAuction(
-               editingAuction.id,
-                {title: values.title,
-                description: values.description,
-                basePrice: values.basePrice,
-                startTime: new Date(values.startTime),
-                duration: values.duration,
-                currentBid: values.basePrice,
-                image: values.image
-              });
-            } else {
-              await registerAuction(
-                {
-                  id: uuidv4(),
-                  title: values.title,
-                  description: values.description,
-                  basePrice: values.basePrice,
-                  currentBid: values.basePrice,
-                  startTime: new Date(values.startTime),
-                  duration: values.duration,
-                  status: "coming",
-                  image: values.image || "",
-                }
-              );
-            }
-            formik.resetForm();
-            setEditingAuction(null);
-            setOpenRegisterAuction(false);
-            fetchAuctions();
-          } catch (error) {
-            console.error("Error saving auctions", error);
-          }
-        },
+      try {
+        if (editingAuction) {
+          await updateAuction(editingAuction.id, {
+            title: values.title,
+            description: values.description,
+            basePrice: values.basePrice,
+            startTime: localToUTC(values.startTime),
+            duration: values.duration,
+            currentBid: values.basePrice,
+            image: values.image,
+            status: "coming"
+          });
+        } else {
+          await registerAuction({
+            id: uuidv4(),
+            title: values.title,
+            description: values.description,
+            basePrice: values.basePrice,
+            currentBid: values.basePrice,
+            startTime: localToUTC(values.startTime),
+            duration: values.duration,
+            status: "coming",
+            image: values.image || "",
+          });
+        }
+        formik.resetForm();
+        setEditingAuction(null);
+        setOpenRegisterAuction(false);
+        fetchAuctions();
+      } catch (error) {
+        console.error("Error saving auctions", error);
+      }
+    },
   });
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +116,15 @@ export const useAuction = () => {
   };
 
   const handleEditAuction = (auction: Auction) => {
+    formik.setValues({
+      title: auction.title,
+      description: auction.description,
+      basePrice: auction.basePrice,
+      startTime: new Date(auction.startTime).toISOString().slice(0, 16),
+      duration: auction.duration,
+      image: auction.image || "",
+      status: auction.status,
+    });
     setEditingAuction(auction);
     setOpenRegisterAuction(true);
   };

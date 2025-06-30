@@ -12,7 +12,9 @@ export const esJSON = {
         usernameMax: "El nombre de usuario debe tener menos de 50 caracteres",
         passwordMin: "La contraseña debe tener al menos 6 caracteres",
         passwordMax: "La contraseña debe tener menos de 50 caracteres",
-        required: "Este campo es obligatorio"
+        required: "Este campo es obligatorio",
+        bidrequired: "El monto de la puja es obligatorio",
+        bidmin: "La puja mínima debe ser al menos "
     },
     "Layout": {
         profile: "Perfil",
@@ -80,5 +82,14 @@ export const esJSON = {
         auction: "Subasta",
         amount: "Monto",
         time: "Tiempo"
+    },
+    "Bid":{
+        title: "Pujas",
+        amount: "Cantidad",
+        userId: "Usuario",
+        time: "Tiempo",
+        noBids: "No hay pujas disponibles para esta sub",
+        submit: "Enviar Puja",
+        successMessage: "Puja realizada exitosamente",
     }
 };

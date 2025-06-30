@@ -4,15 +4,18 @@ import type { Auction } from "../interfaces/auctionInterface";
 
 interface AuctionState {
   auctions: Auction[];
+  selectedAuction: Auction | null;
   fetchAuctions: () => void;
   updateAuctionStatus: (
     auctionId: string,
     newStatus: Auction["status"]
   ) => void;
+  setSelectedAuction: (auction: Auction | null) => void;
 }
 
 export const useAuctionStore = create<AuctionState>((set) => ({
   auctions: [],
+  selectedAuction: null,
   fetchAuctions: async () => {
     try {
       const auctionsData = await getAuctions();
@@ -21,7 +24,6 @@ export const useAuctionStore = create<AuctionState>((set) => ({
       console.error("Error:", err);
     }
   },
-
   updateAuctionStatus: async (auctionId, newStatus) => {
     try {
       await updateAuction(auctionId, { status: newStatus });
@@ -34,4 +36,5 @@ export const useAuctionStore = create<AuctionState>((set) => ({
       console.error("Failed to update auction status", error);
     }
   },
+  setSelectedAuction: (auction) => set({ selectedAuction: auction }),
 }));
