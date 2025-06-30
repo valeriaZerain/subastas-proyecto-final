@@ -9,7 +9,6 @@ import {
   Divider,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import GavelIcon from '@mui/icons-material/Gavel';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link, useLocation } from "react-router-dom";
@@ -46,19 +45,6 @@ const Sidebar = ({
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary={t('Layout.home')} />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem disablePadding>
-          <ListItemButton
-            component={Link}
-            to="/auction"
-            selected={location.pathname === "/auction"}
-          >
-            <ListItemIcon>
-              <GavelIcon />
-            </ListItemIcon>
-            <ListItemText primary={t('Layout.auction')} />
           </ListItemButton>
         </ListItem>
 

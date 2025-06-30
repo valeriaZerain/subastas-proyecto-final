@@ -8,35 +8,14 @@ Cada subasta está asociada a un producto con imagen, descripción, precio base 
 
 Los usuarios registrados pueden realizar ofertas en tiempo real y visualizar los resultados cuando la subasta finaliza.
 
-## Requerimientos Funcionales
-
-A continuación se describen las historias de usuario (User Stories) que deberás implementar en esta aplicación. Cada historia representa un requerimiento funcional que debe estar completamente resuelto para cumplir con los criterios del proyecto.
-
-Estas historias están pensadas para ser desarrolladas **por un estudiante de manera individual** en un plazo de una semana (5 dias). **(Proyecto Individual)**
-
-
-### Registro e Identificación de Usuarios
-
--   Registro simple con nombre de usuario y avatar (opcional pts extras para el avatar).
-
-
--   El rol (usuario o admin) se define al momento del registro mediante una opción de selección.
-
--   Los usuarios y sus roles se mantienen persistentes en JSON Server (/usuarios.json).
-
 ### US1: Subasta de Productos
 
 Como usuario visitante,
 quiero ver una lista de productos disponibles para subasta con sus detalles,
 para poder decidir en cuál me interesa participar.
 
--   El sistema carga los productos desde un backend simulado (JSON Server).
-
--   Cada producto contiene: título, descripción, imagen, precio base y duración (en segundos).
 
 - Cada subasta tiene un cronómetro visible.
-
-- Se agrupan en 3 Subastas actuales, Subastas Proximas y Subastas Pasadas.
 
 ![alt text](image.png)
 
@@ -90,23 +69,6 @@ para poder gestionar qué artículos están disponibles.
 
 -   Los administradores pueden ser definidos estáticamente o mediante un CRUD de usuarios.
 
-### US5: Gestion de Usuarios(Administrador)
-
-Como administrador,
-quiero crear, editar y eliminar usuarios,
-para poder gestionar qué artículos están disponibles.
-
--   CRUD completo de usuarios.
-
--   Acceso exclusivo con rol admin.
-
--   Protegido mediante Context y guards de ruta.
-
--   CRUD completo de usuarios de subasta: crear, editar, eliminar.
-
--   Panel exclusivo accesible solo por usuarios con rol admin.
--   datos persistentes en usuarios.json
-
 ## Requerimientos Técnicos
 
 -   Hooks y Estado
@@ -124,12 +86,6 @@ para poder gestionar qué artículos están disponibles.
 -   Compound Component: Para la Card del Producto.
 
 -   Manejo de instancias para el json-server y el sse
-
-### Formulario y Validación
-
--   Formularios controlados con Formik + Yup
-
--   Validación de formato, rango de monto, reglas de negocio
 
 ### UI
 
@@ -179,7 +135,6 @@ para poder gestionar qué artículos están disponibles.
 
 | Día | Actividades principales                                                              |
 | --- | ------------------------------------------------------------------------------------ |
-| 1   | - Setup del proyecto, JSON Server y Context- Registro de usuarios + selección de rol |
 | 2   | - Implementar US1 (lista de productos + cronómetro)- CRUD de productos (US4)         |
 | 3   | - Implementar lógica de pujas (US2)- Simulación SSE- Validaciones de oferta          |
 | 4   | - Historial por usuario (US3)- CRUD de usuarios con guard (US5)                      |
@@ -206,8 +161,6 @@ para poder gestionar qué artículos están disponibles.
 -   Video demostrativo (máx. 5 minutos).
 
 -   README.md con instrucciones y descripción clara del proyecto.
-
--   JSON Server funcionando con datos iniciales.
 
 ## Features para nota Adicional 
 

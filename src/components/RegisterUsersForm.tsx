@@ -10,6 +10,11 @@ import Stack from "@mui/material/Stack";
 import { t } from "i18next";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialog-paper": {
+    maxWidth: 700,
+    width: "90%",
+    minWidth: 500,
+  },
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
   },
@@ -34,13 +39,8 @@ export const RegisterUsers = ({
   onSubmit,
 }: CustomDialogsProps) => {
   return (
-    <BootstrapDialog
-      onClose={onClose}
-      open={open}
-    >
-      <form
-        onSubmit={onSubmit}
-      >
+    <BootstrapDialog onClose={onClose} open={open}>
+      <form onSubmit={onSubmit}>
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           {title}
         </DialogTitle>

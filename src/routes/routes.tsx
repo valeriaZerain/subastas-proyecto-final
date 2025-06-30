@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "../layout/Layout";
 import { useAuth } from "../contexts/authContext";
-import { useAuthStore } from "../store/authStore";
 import LoginPage from "../pages/LoginPage";
 import ProtectedRoutes from "../guards/ProtectedRoutes";
 import HomePage from "../pages/HomePage";
@@ -10,7 +9,6 @@ import AdminPanelPage from "../pages/AdminPanelPage";
 import AuctionRoomPage from "../pages/AuctionRoomPage";
 
 const RoutesApp = () => {
-  const { user } = useAuthStore((state) => state);
   const { isAdmin, isAuth } = useAuth();
   return (
     <BrowserRouter>
@@ -38,7 +36,7 @@ const RoutesApp = () => {
           }
         >
           <Route path="home" element={<HomePage />} />
-          <Route path="auction" element={<AuctionRoomPage />} />
+          <Route path="auction/:id" element={<AuctionRoomPage />} />
           <Route
             path="admin/user-management"
             element={isAdmin ? <UserAdminPage /> : <Navigate to="/home" />}

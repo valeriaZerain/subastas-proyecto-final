@@ -1,20 +1,22 @@
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import {
+  Button,
+  TableRow,
+  TablePagination,
+  TableHead,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+  Paper,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
 import { useState, type ChangeEvent } from "react";
 import type { User } from "../interfaces/userInterface";
-import Box from "@mui/material/Box";
 import { t } from "i18next";
 
 interface Column {
-  id: "nombre" | "rol" | "acciones";
+  id: "nombre" | "rol" | "actions";
   label: string;
   minWidth?: number;
   align?: "right" | "left" | "center";
@@ -22,13 +24,11 @@ interface Column {
 
 interface UsersListProps {
   users: User[];
-  deleteUser: (userId: string) => void;
+  updateUser: (user: User) => void;
+  deleteUser: (user: User) => void;
 }
 
-export default function UsersList({
-  users,
-  deleteUser,
-}: UsersListProps) {
+export default function UsersList({ users, updateUser, deleteUser }: UsersListProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -46,7 +46,7 @@ export default function UsersList({
       align: "left",
     },
     {
-      id: "acciones",
+      id: "actions",
       label: t("userManagement.actions"),
       minWidth: 100,
       align: "left",
@@ -95,16 +95,16 @@ export default function UsersList({
                     <TableCell align="left">{user.name}</TableCell>
                     <TableCell align="left">{user.role}</TableCell>
                     <TableCell align="left">
-                      <Box sx={{ display: "flex", gap: { xs: 0.5, sm: 1 } }}>
-                        <IconButton
-                          onClick={() => deleteUser(user.id)}
-                          aria-label="delete"
-                          size="small"
-                          color="error"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Box>
+                      <Button aria-label={t("userManagement.edit")} onClick={() => updateUser(user)}>
+                        <EditIcon />
+                      </Button>
+                      <Button
+                        aria-label={t("userManagement.delete")}
+                        color="error"
+                        onClick={()=>deleteUser(user)}
+                      >
+                        <DeleteIcon />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

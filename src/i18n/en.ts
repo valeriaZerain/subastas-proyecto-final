@@ -38,5 +38,25 @@ export const enJSON = {
         admin: "Admin",
         user: "User",
         photo: "Upload Photo",
+        titleDelete: "Delete User",
+        descriptionDelete: "Are you sure you want to delete this user?",
+        okDelete: "Delete",
+        cancelDelete: "Cancel"
     },
+    "auction": {
+        title: "Auction",
+        description: "Description",
+        basePrice: "Base Price",
+        currentBid: "Current Bid",
+        finalPrice: "Final Price",
+        go: "Place Bid"
+    },
+    "homePage": {
+        all: "All",
+        current: "Current",
+        coming: "Coming",
+        finished: "Finished",
+        filter: "Filter by status",
+        title: "Auctions",
+    }
 };

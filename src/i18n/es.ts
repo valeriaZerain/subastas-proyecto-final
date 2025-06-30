@@ -38,5 +38,25 @@ export const esJSON = {
         admin: "Administrador",
         user: "Usuario",
         photo: "Subir Foto",
+        titleDelete: "Eliminar Usuario",
+        descriptionDelete: "¿Estás seguro de que deseas eliminar este usuario?",
+        okDelete: "Eliminar",
+        cancelDelete: "Cancelar"
+    },
+    "auction": {
+        title: "Subastas",
+        description: "Descripción",
+        basePrice: "Precio Base",
+        finalPrice: "Precio Final",
+        currentBid: "Oferta Actual",
+        go: "Participar en Oferta"
+    },
+    "homePage": {
+        all: "Todas",
+        current: "Actuales",
+        coming: "Próximas",
+        finished: "Finalizadas",
+        filter: "Filtrar por estado",
+        title: "Subastas Actuales"
     }
 };

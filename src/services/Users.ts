@@ -47,8 +47,7 @@ export const registerUser = async (
     throw error;
   }
 };
-
-export const updateUser = async ( user: User) => {
+export const updateUser = async (user: User) => {
   try {
     const response = await jsonServerInstance.put(`${USERS_URL}/${user.id}`, user);
     return response.data;

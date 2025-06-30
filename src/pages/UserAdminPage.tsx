@@ -8,87 +8,39 @@ import {
   MenuItem,
   Avatar,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useFormik } from "formik";
 
 import { RegisterUsers } from "../components/RegisterUsersForm";
 import UsersList from "../components/UsersList";
-import { useUserStore } from "../store/userStore";
-import { registerUser } from "../services/Users";
-import { t } from "i18next";
-import * as Yup from "yup";
 
-const userSchema = Yup.object({
-  username: Yup.string()
-    .min(3, t("validation.usernameMin"))
-    .max(50, t("validation.usernameMax"))
-    .required(t("validation.required")),
-  password: Yup.string()
-    .min(6, t("validation.passwordMin"))
-    .max(50, t("validation.passwordMax"))
-    .required(t("validation.required")),
-  role: Yup.string().oneOf(["admin", "user"], t("validation.roleInvalid")),
-  photoUrl: Yup.string(),
-});
+import { t } from "i18next";
+import { AlertDialog } from "../components/Alert";
+import { useUsers } from "../hooks/useUsers";
 
 function UserAdminPage() {
-  const [openRegisterUser, setOpenRegisterUser] = useState(false);
-  const { users, fetchUsers } = useUserStore();
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      photoUrl: "",
-      role: "",
-      password: "",
-    },
-    validationSchema: userSchema,
-    onSubmit: async (values) => {
-      try {
-        console.log("Form values:", values);
-        await registerUser(
-          values.username,
-          values.password,
-          values.role,
-          values.photoUrl
-        );
-        formik.resetForm();
-        setOpenRegisterUser(false);
-        fetchUsers();
-        console.log("User registered successfully");
-      } catch (error) {
-        console.error("Error registering user", error);
-      }
-    },
-  });
-
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        formik.setFieldValue("photoUrl", reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const handleOpenRegisterUser = () => setOpenRegisterUser(true);
-
-  const handleCloseRegisterUser = () => {
-    formik.resetForm();
-    setOpenRegisterUser(false);
-    fetchUsers();
-  };
-
-  const deleteUser = async (userId: string) => {
-    console.log("Delete user with ID:", userId);
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
+  const {
+    openAlert,
+    handleCloseOk,
+    handleCloseAlert,
+    handleOpenRegisterUser,
+    openRegisterUser,
+    handleCloseRegisterUser,
+    formik,
+    handleImageUpload,
+    users,
+    handleEditUser,
+    handleOpenAlert,
+  } = useUsers();
   return (
     <Container sx={{ ml: 0, mr: 0 }}>
+      <AlertDialog
+        open={openAlert}
+        handleCloseOk={handleCloseOk}
+        handleCloseCancel={handleCloseAlert}
+        title={t("userManagement.titleDelete")}
+        description={t("userManagement.descriptionDelete")}
+        ok={t("userManagement.okDelete")}
+        cancel={t("userManagement.cancelDelete")}
+      ></AlertDialog>
       <Typography variant="h4" gutterBottom>
         {t("userManagement.title")}
       </Typography>
@@ -108,6 +60,24 @@ function UserAdminPage() {
         onClose={handleCloseRegisterUser}
         onSubmit={formik.handleSubmit}
       >
+        <Box mt={2} display="flex" flexDirection="column" alignItems="center">
+          <Avatar
+            src={formik.values.photoUrl || "/static/images/avatar/1.jpg"}
+            sx={{ width: 100, height: 100, mb: 2 }}
+          />
+          <input
+            accept="image/*"
+            id="upload-photo"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleImageUpload}
+          />
+          <label htmlFor="upload-photo">
+            <Button variant="contained" component="span">
+              {t("userManagement.photo")}
+            </Button>
+          </label>
+        </Box>
         <Typography variant="body2" sx={{ mb: 1 }}>
           {t("userManagement.name")}
         </Typography>
@@ -152,30 +122,12 @@ function UserAdminPage() {
           <MenuItem value="admin">{t("userManagement.admin")}</MenuItem>
           <MenuItem value="user">{t("userManagement.user")}</MenuItem>
         </Select>
-
-        <Box mt={2}>
-          <Typography variant="body2" sx={{ mb: 1 }}>
-            {t("userManagement.photo")}
-          </Typography>
-          <Avatar
-            src={formik.values.photoUrl || "/static/images/avatar/1.jpg"}
-            sx={{ width: 100, height: 100, mb: 2 }}
-          />
-          <input
-            accept="image/*"
-            id="upload-photo"
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleImageUpload}
-          />
-          <label htmlFor="upload-photo">
-            <Button variant="contained" component="span">
-              {t("userManagement.photo")}
-            </Button>
-          </label>
-        </Box>
       </RegisterUsers>
-      <UsersList users={users} deleteUser={deleteUser} />
+      <UsersList
+        users={users}
+        updateUser={handleEditUser}
+        deleteUser={handleOpenAlert}
+      />
     </Container>
   );
 }
