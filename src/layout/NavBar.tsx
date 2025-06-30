@@ -14,6 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useAuthStore } from "../store/authStore";
 import { useAuth } from "../contexts/authContext";
 import {t} from "i18next";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   onMenuClick: () => void;
@@ -23,6 +24,7 @@ interface NavbarProps {
 
 const Navbar = ({ onMenuClick }: NavbarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
   const { user } = useAuthStore((state) => state);
   const { logout } = useAuth();
   const settings = [t('Layout.profile'), t('Layout.logout')];
@@ -37,6 +39,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
   const handleMenuItemClick = (setting: string) => {
     if (setting === t('Layout.logout')) {
       logout();
+    } else if (setting === t('Layout.profile')) {
+      navigate(`/user/${user.id}`);
     }
     handleCloseUserMenu();
   };

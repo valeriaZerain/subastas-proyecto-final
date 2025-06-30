@@ -7,6 +7,7 @@ import HomePage from "../pages/HomePage";
 import UserAdminPage from "../pages/UserAdminPage";
 import AdminPanelPage from "../pages/AdminPanelPage";
 import AuctionRoomPage from "../pages/AuctionRoomPage";
+import UserHistorialPage from "../pages/UserHistorialPage";
 
 const RoutesApp = () => {
   const { isAdmin, isAuth } = useAuth();
@@ -36,6 +37,7 @@ const RoutesApp = () => {
           }
         >
           <Route path="home" element={<HomePage />} />
+          <Route path="/user/:id" element={<UserHistorialPage />} />
           <Route path="auction/:id" element={<AuctionRoomPage />} />
           <Route
             path="admin/user-management"

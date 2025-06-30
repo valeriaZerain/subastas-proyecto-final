@@ -73,5 +73,11 @@ export const enJSON = {
         finished: "Finished",
         filter: "Filter by status",
         title: "Auctions",
+    },
+    "auctionHistory": {
+        title: "Auction and Bids History",
+        auction: "Auction",
+        amount: "Amount",
+        time: "Time"
     }
 };

@@ -1,13 +1,5 @@
 # Proyecto Final: Plataforma de Subastas en Línea
 
-## Descripción General
-
-Esta aplicación simula una plataforma de subastas donde los usuarios pueden participar en pujas por distintos artículos dentro de un tiempo límite. 
-
-Cada subasta está asociada a un producto con imagen, descripción, precio base y una duración definida. 
-
-Los usuarios registrados pueden realizar ofertas en tiempo real y visualizar los resultados cuando la subasta finaliza.
-
 ### US2: Proceso de Puja
 
 Como usuario registrado,
@@ -41,7 +33,6 @@ para poder revisar mis actividades pasadas.
 
 -   Se registra el historial de pujas por producto, incluyendo usuario, hora y monto.
 
-
 ## Requerimientos Técnicos
 
 -   Hooks y Estado
@@ -58,19 +49,9 @@ para poder revisar mis actividades pasadas.
 
 ### UI
 
--   Interfaz moderna con MUI
-
--   Tablero de subastas en tiempo real
-
--   Componente visual del cronómetro
-
 -   Snackbar para confirmaciones o errores
 
 -   Render Props para cada ítem subastado
-
--   Internacionalización
-
-    -   i18n con react-i18next para soporte en múltiples idiomas
 
 ### Manejo de Errores
 

@@ -74,5 +74,11 @@ export const esJSON = {
         finished: "Finalizadas",
         filter: "Filtrar por estado",
         title: "Subastas Actuales"
+    },
+    "auctionHistory": {
+        title: "Historial de Subastas y Pujas",
+        auction: "Subasta",
+        amount: "Monto",
+        time: "Tiempo"
     }
 };
