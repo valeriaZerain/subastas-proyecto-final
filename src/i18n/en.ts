@@ -49,7 +49,8 @@ export const enJSON = {
         basePrice: "Base Price",
         currentBid: "Current Bid",
         finalPrice: "Final Price",
-        go: "Place Bid"
+        go: "Place Bid",
+        timeLeft: "Time Left",
     },
     "homePage": {
         all: "All",

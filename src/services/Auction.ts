@@ -1,5 +1,6 @@
 import jsonServerInstance from "../api/jsonServerInstance";
 import { v4 as uuidv4 } from 'uuid';
+import type { Auction } from "../interfaces/auctionInterface";
 const USERS_URL = "auctions";
 
 export const getAuctions = async () => {
@@ -31,6 +32,16 @@ export const createAuction = async (
     return response.data;
   } catch (error) {
     console.error("Error creating auction", error);
+    throw error;
+  }
+};
+
+export const updateAuction = async (id: string, data: Partial<Auction>) => {
+  try {
+    const response = await jsonServerInstance.patch(`${USERS_URL}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating auction", error);
     throw error;
   }
 };

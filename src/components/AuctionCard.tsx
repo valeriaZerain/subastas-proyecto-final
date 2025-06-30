@@ -1,5 +1,3 @@
-// components/AuctionCard.tsx
-
 import {
   Card,
   CardMedia,
@@ -7,12 +5,13 @@ import {
   Typography,
   CardActions,
   Button,
+  Box,
 } from "@mui/material";
 import { createContext, useContext } from "react";
 import type { Auction } from "../interfaces/auctionInterface";
+import { AuctionTimer } from "./Timer";
 import { t } from "i18next";
 
-// Contexto para compartir el `auction` entre subcomponentes
 const AuctionCardContext = createContext<Auction | null>(null);
 
 const Root = ({
@@ -39,16 +38,38 @@ const Root = ({
   );
 };
 
-const Image = () => {
+const Image = ({ onStatusChange }: { onStatusChange?: (newStatus: Auction['status']) => void }) => {
   const auction = useContext(AuctionCardContext);
   if (!auction) return null;
 
+  const showTimer = auction.status === "actual";
+
   return (
-    <CardMedia
-      sx={{ height: 140 }}
-      image={auction.image || "/static/images/placeholder.png"}
-      title="auctionPhoto"
-    />
+    <Box sx={{ position: "relative", height: 140 }}>
+      <CardMedia
+        sx={{ height: "100%" }}
+        image={auction.image || "/static/images/placeholder.png"}
+        title="auctionPhoto"
+      />
+      {showTimer && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            padding: "4px 8px",
+            borderRadius: 1,
+            fontSize: "0.8rem",
+            fontWeight: "bold",
+          }}
+        >
+          <AuctionTimer 
+            auction={auction} 
+            onStatusChange={onStatusChange || (() => {})}
+          />
+        </Box>
+      )}
+    </Box>
   );
 };
 
@@ -70,6 +91,7 @@ const Content = () => {
       >
         {auction.title}
       </Typography>
+
       <Typography
         variant="body2"
         sx={{
@@ -81,10 +103,8 @@ const Content = () => {
       >
         {auction.description}
       </Typography>
-      <Typography
-        variant="body2"
-        sx={{ color: "text.secondary", mt: "auto" }}
-      >
+
+      <Typography variant="body2" sx={{ color: "text.secondary", mt: "auto" }}>
         {auction.status === "finished"
           ? t("auction.finalPrice")
           : auction.status === "actual"

@@ -49,7 +49,8 @@ export const esJSON = {
         basePrice: "Precio Base",
         finalPrice: "Precio Final",
         currentBid: "Oferta Actual",
-        go: "Participar en Oferta"
+        go: "Participar en Oferta",
+        timeLeft: "Tiempo Restante",
     },
     "homePage": {
         all: "Todas",

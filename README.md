@@ -8,17 +8,6 @@ Cada subasta está asociada a un producto con imagen, descripción, precio base 
 
 Los usuarios registrados pueden realizar ofertas en tiempo real y visualizar los resultados cuando la subasta finaliza.
 
-### US1: Subasta de Productos
-
-Como usuario visitante,
-quiero ver una lista de productos disponibles para subasta con sus detalles,
-para poder decidir en cuál me interesa participar.
-
-
-- Cada subasta tiene un cronómetro visible.
-
-![alt text](image.png)
-
 ### US2: Proceso de Puja
 
 Como usuario registrado,
@@ -73,8 +62,6 @@ para poder gestionar qué artículos están disponibles.
 
 -   Hooks y Estado
 
--   useContext: para manejar la sesión del usuario
-
 -   Zustand: para manejar el estado global de subastas y pujas
 
 -   useEffect + useRef: para temporizador de subasta y actualizaciones
@@ -82,8 +69,6 @@ para poder gestionar qué artículos están disponibles.
 -   useMemo, useCallback: para lógica de pujas eficientes
 
 -   Custom hook: useAuction() con funciones para pujar, registrar, cancelar, etc.
-  
--   Compound Component: Para la Card del Producto.
 
 -   Manejo de instancias para el json-server y el sse
 
