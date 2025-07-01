@@ -1,5 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import type { Bid } from "../interfaces/bidInterface";
+import { t } from "i18next";
 
 interface BidCardUserProps {
   bid: Bid;
@@ -28,9 +29,9 @@ export const BidCardUser = ({ bid }: BidCardUserProps) => {
         <Typography variant="h6">
           {user?.name || "Usuario anónimo"}
         </Typography>
-        <Typography variant="body2">Monto: ${bid.amount}</Typography>
+        <Typography variant="body2">{t("Bid.amount")} ${bid.amount}</Typography>
         <Typography variant="body2">
-          Fecha: {new Date(bid.timestamp).toLocaleString()}
+          {t("Bid.date")} {new Date(bid.timestamp).toLocaleString()}
         </Typography>
       </Box>
     </Box>

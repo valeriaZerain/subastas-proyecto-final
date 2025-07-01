@@ -1,48 +1,5 @@
 # Proyecto Final: Plataforma de Subastas en Línea
 
-### US2: Proceso de Puja
-
-Como usuario registrado,
-quiero poder ofertar en productos activos,
-para intentar ganar la subasta.
-
-
--   Las pujas se actualizan en tiempo real para todos los usuarios conectados (simulado con SSE).
-
--   Al finalizar el cronómetro, se muestra el ganador y el monto final.
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
-
-# US3: Historial y Resultados
-
-Como usuario registrado,
-quiero ver el historial de mis subastas y las ofertas realizadas,
-para poder revisar mis actividades pasadas.
-
--   Se muestra el ganador y estadísticas luego de cada subasta.
-
-## Requerimientos Técnicos
-
--   Hooks y Estado
-
--   Zustand: para manejar el estado global de subastas y pujas
-
--   useMemo, useCallback: para lógica de pujas eficientes
-
--   Custom hook: useAuction() con funciones para pujar, registrar, cancelar, etc.
-
--   Manejo de instancias para el json-server y el sse
-
-### UI
-
--   Render Props para cada ítem subastado
-
-### Manejo de Errores
-
--   Implementación de ErrorBoundary para manejar errores en renderizado de subastas o conexión
-
 ### Arquitectura del Proyecto Sugerida
 ```
 /src
@@ -66,14 +23,6 @@ para poder revisar mis actividades pasadas.
   /i18n
   /api
 ```
-
-### Cronograma Sugerido (5 días)
-
-| Día | Actividades principales                                                              |
-| --- | ------------------------------------------------------------------------------------ |
-| 3   | - Implementar lógica de pujas (US2)- Simulación SSE- Validaciones de oferta          |
-| 4   | - Historial por usuario (US3)                                                        |
-| 5   | - Estilizar con MUI- Agregar i18n + ErrorBoundary- README + video + revisión final   |
 
 
 ### Rubrica de Evaluacion

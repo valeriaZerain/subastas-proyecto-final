@@ -11,12 +11,13 @@ import { t } from "i18next";
 import { useAuctionStore } from "../store/auctionStore";
 import { useBidStore } from "../store/bidStore";
 import { AuctionTimer } from "./Timer";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { postAuctionWinner } from "../services/Auction";
 
 export const AuctionDetails = () => {
   const { selectedAuction, setSelectedAuction } = useAuctionStore();
   const bids = useBidStore((state) => state.bids);
-
+  const previousStatusRef = useRef<string | null>(null);
   const highestBid = Math.max(0, ...bids.map((b) => b.amount));
 
   useEffect(() => {
@@ -24,6 +25,29 @@ export const AuctionDetails = () => {
       setSelectedAuction({ ...selectedAuction, currentBid: highestBid });
     }
   }, [bids, selectedAuction]);
+
+  useEffect(() => {
+    const currentStatus = selectedAuction?.status;
+
+    if (
+      previousStatusRef.current === "actual" &&
+      currentStatus === "finished"
+    ) {
+      const winnerBid = bids.reduce((prev, current) =>
+        prev.amount > current.amount ? prev : current
+      );
+
+      if (winnerBid && winnerBid.userId && selectedAuction) {
+        postAuctionWinner(
+          selectedAuction.id,
+          winnerBid.userId,
+          winnerBid.user?.name || "Usuario",
+          winnerBid.amount
+        );
+      }
+    }
+    previousStatusRef.current = currentStatus ?? null;
+  }, [selectedAuction?.status]);
 
   if (!selectedAuction) {
     return (
@@ -161,7 +185,10 @@ export const AuctionDetails = () => {
                 {t("auction.startTime")}:
               </Typography>
               <Typography variant="body2">
-                {new Date(selectedAuction.startTime).toISOString().slice(0, 19).replace("T", " ")}
+                {new Date(selectedAuction.startTime)
+                  .toISOString()
+                  .slice(0, 19)
+                  .replace("T", " ")}
               </Typography>
             </Box>
           </Grid>

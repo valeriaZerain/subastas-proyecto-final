@@ -114,6 +114,17 @@ export function Bid() {
 
           addBid(bid);
         }
+
+        if (data.tipo === "winner" && data.auctionId === auctionId) {
+          setAlert({
+            open: true,
+            message: `${t("Bid.winnerMessage", {
+              winnerName: data.winnerName,
+              amount: data.amount,
+            })}`,
+            severity: "info",
+          });
+        }
       } catch (error) {
         console.error("Error parsing SSE message", error);
       }

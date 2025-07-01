@@ -2,6 +2,7 @@ import jsonServerInstance from "../api/jsonServerInstance";
 import { v4 as uuidv4 } from "uuid";
 import type { Auction } from "../interfaces/auctionInterface";
 import { getUserBids } from "./BidServices";
+import { serverSentEventInstance } from "../api/serverSentEventInstance";
 const AUCTION_URL = "auctions";
 
 export const getAuctions = async () => {
@@ -107,6 +108,31 @@ export const getUserAuctionHistory = async (userId: string) => {
     return auctionHistoryWithBids;
   } catch (error) {
     console.error("Error getting user auction history with bids", error);
+    throw error;
+  }
+};
+
+export const postAuctionWinner = async (
+  auctionId: string,
+  winnerId: string,
+  winnerName: string,
+  amount: number
+) => {
+  try {
+    const response = await jsonServerInstance.patch(
+      `${AUCTION_URL}/${auctionId}`,
+      { winnerId: winnerId }
+    );
+    await serverSentEventInstance.post("/winner", {
+      auctionId,
+      winnerId,
+      winnerName,
+      amount,
+    }
+  );
+    return response.data;
+  } catch (error) {
+    console.error("Error posting auction winner", error);
     throw error;
   }
 };

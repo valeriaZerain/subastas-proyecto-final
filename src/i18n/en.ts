@@ -91,5 +91,7 @@ export const enJSON = {
         submit: "Submit Bid",
         succesed: "Bid placed successfully",
         errorMessage: "Error placing bid, please try again",
+        date: "Date",
+        winnerMessage: "Winner of the auction",
     }
 };

@@ -1,6 +1,7 @@
 import jsonServerInstance from "../api/jsonServerInstance";
 import { serverSentEventInstance } from "../api/serverSentEventInstance";
 import type { Bid } from "../interfaces/bidInterface";
+import { updateAuction } from "./Auction";
 import { getUserById } from "./Users";
 const BID_URL = "bids";
 
@@ -20,6 +21,7 @@ export const createBid = async (bid: Bid) => {
       ...bid
     });
     await serverSentEventInstance.post(BID_URL, {...bid});
+    await updateAuction(bid.auctionId, { currentBid: bid.amount });
     return response.data;
   } catch (error) {
     console.error("Error creating bid", error);

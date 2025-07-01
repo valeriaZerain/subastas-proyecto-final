@@ -30,9 +30,10 @@
       "description": "Patito de hule que te ayudara a ser el mejor programador.",
       "basePrice": 500,
       "currentBid": 500,
-      "startTime": "2025-07-01T12:17:00.000Z",
-      "duration": 300,
-      "status": "actual"
+      "startTime": "2025-07-01T14:03:00.000Z",
+      "duration": 50,
+      "status": "finished",
+      "winnerId": "2"
     },
     {
       "id": "2",
@@ -81,6 +82,47 @@
     }
   ],
   "bids": [
-    
+    {
+      "id": "a347602d-dadd-408b-aa06-e37fac9c38eb",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 501,
+      "timestamp": "2025-07-01T17:03:15.330Z"
+    },
+    {
+      "id": "20b27817-9b0a-450a-ba79-ec5d06c5efb0",
+      "auctionId": "1",
+      "userId": "1",
+      "amount": 510,
+      "timestamp": "2025-07-01T17:03:20.045Z"
+    },
+    {
+      "id": "b54114f7-9019-4295-be65-525734a9accb",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 520,
+      "timestamp": "2025-07-01T17:03:26.325Z"
+    },
+    {
+      "id": "2807fe2d-a48d-461c-8896-85abf853f2cc",
+      "auctionId": "1",
+      "userId": "1",
+      "amount": 530,
+      "timestamp": "2025-07-01T17:03:40.046Z"
+    },
+    {
+      "id": "69c26891-cd11-42fd-ab08-f46b4c28a122",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 540,
+      "timestamp": "2025-07-01T17:40:03.293Z"
+    },
+    {
+      "id": "3d9ec6e7-e8aa-4958-9869-89ace55615c8",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 600,
+      "timestamp": "2025-07-01T17:56:42.681Z"
+    }
   ]
 }

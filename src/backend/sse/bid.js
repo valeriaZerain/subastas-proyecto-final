@@ -39,3 +39,17 @@ app.post("/bids", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor SSE corriendo en http://localhost:${PORT}`);
 });
+
+app.post("/winner", (req, res) => {
+  const { auctionId, winnerId, amount, winnerName } = req.body;
+
+  broadcastSSE({
+    tipo: "winner",
+    auctionId,
+    winnerId,
+    amount,
+    winnerName,
+  });
+
+  res.status(200).json({ success: true });
+}); 

@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAuctionStore } from "../store/auctionStore";
 import { AuctionCard } from "../components/AuctionCard";
+import { BrokenComponent } from "../components/ButtonError";
 import { useNavigate } from "react-router-dom";
 import type { Auction } from "../interfaces/auctionInterface";
 import { t } from "i18next";
@@ -96,6 +97,7 @@ function HomePage() {
           </Grid>
         ))}
       </Grid>
+      <BrokenComponent/>
     </Container>
   );
 }
