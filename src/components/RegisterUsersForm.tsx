@@ -60,7 +60,7 @@ export const RegisterUsers = ({
           <Stack spacing={2}>{children}</Stack>
         </DialogContent>
         <DialogActions>
-          <Button type="submit">{t("userManagement.addUser")}</Button>
+          <Button type="submit">{t("userManagement.add")}</Button>
         </DialogActions>
       </form>
     </BootstrapDialog>

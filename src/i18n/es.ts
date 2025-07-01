@@ -31,7 +31,7 @@ export const esJSON = {
         actions: "Acciones",
         edit: "Editar",
         delete: "Eliminar",
-        addUser: "Agregar Usuario",
+        add: "Agregar",
         userAdded: "Usuario agregado exitosamente",
         userUpdated: "Usuario actualizado exitosamente",
         userDeleted: "Usuario eliminado exitosamente",

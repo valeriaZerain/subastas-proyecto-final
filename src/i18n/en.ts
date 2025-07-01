@@ -31,7 +31,7 @@ export const enJSON = {
         actions: "Actions",
         edit: "Edit",
         delete: "Delete",
-        addUser: "Add User",
+        add: "Add",
         userAdded: "User added successfully",
         userUpdated: "User updated successfully",
         userDeleted: "User deleted successfully",

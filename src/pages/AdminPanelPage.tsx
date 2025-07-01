@@ -148,9 +148,6 @@ function AdminPanelPage() {
           helperText={formik.touched.duration && formik.errors.duration}
           sx={{ mb: 2 }}
         />
-        <Typography variant="body2" sx={{ mb: 1 }}>
-          {t("auction.status")}
-        </Typography>
       </RegisterUsers>
       <AuctionList
         auctions={auctions}

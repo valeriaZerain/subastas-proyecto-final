@@ -110,7 +110,7 @@ const Content = () => {
           : auction.status === "actual"
           ? t("auction.currentBid")
           : t("auction.basePrice")}
-        : ${auction.currentBid || auction.basePrice}
+        : ${auction.currentBid}
       </Typography>
     </CardContent>
   );
