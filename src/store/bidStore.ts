@@ -1,6 +1,7 @@
-import { create } from 'zustand';
-import type { Bid } from '../interfaces/bidInterface';
-import { getBids } from '../services/BidServices';
+import { create } from "zustand";
+import type { Bid } from "../interfaces/bidInterface";
+import { getBids } from "../services/BidServices";
+import { getUserById } from "../services/Users";
 
 interface BidStore {
   bids: Bid[];
@@ -14,7 +15,26 @@ export const useBidStore = create<BidStore>((set) => ({
   fetchBids: async (auctionId: string) => {
     try {
       const data = await getBids(auctionId);
-      set({ bids: data });
+      const enrichedBids = await Promise.all(
+        data.map(async (bid : Bid) => {
+          try {
+            const user = await getUserById(bid.userId);
+            return {
+              ...bid,
+              user: {
+                id: user.id,
+                name: user.name,
+                photoUrl: user.photoUrl || "",
+              },
+            };
+          } catch (userError) {
+            console.error(`Error fetching user ${bid.userId}`, userError);
+            return { ...bid };
+          }
+        })
+      );
+
+      set({ bids: enrichedBids });
     } catch (error) {
       console.error("Error fetching bids", error);
     }

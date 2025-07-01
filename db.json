@@ -32,7 +32,7 @@
       "currentBid": 500,
       "startTime": "2025-07-01T10:25:00.000Z",
       "duration": 300,
-      "status": "actual"
+      "status": "finished"
     },
     {
       "id": "2",
@@ -89,13 +89,6 @@
       "timestamp": "2025-06-29T14:01:00Z"
     },
     {
-      "id": "b2",
-      "auctionId": "1",
-      "userId": "3",
-      "amount": 1050,
-      "timestamp": "2025-06-29T14:02:30Z"
-    },
-    {
       "id": "b3",
       "auctionId": "3",
       "userId": "3",
@@ -108,62 +101,6 @@
       "userId": "1",
       "amount": 950,
       "timestamp": "2025-06-28T12:04:00Z"
-    },
-    {
-      "id": "10757243-adbf-469d-a934-9a8b21c655b3",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 1051,
-      "timestamp": "2025-07-01T14:06:56.590Z"
-    },
-    {
-      "id": "fc4c0218-8c2d-4636-8821-ac2d2d35f2a4",
-      "auctionId": "1",
-      "userId": "1",
-      "amount": 1052,
-      "timestamp": "2025-07-01T14:07:03.043Z"
-    },
-    {
-      "id": "a17728c8-7f55-49c9-9d53-6d765e36c325",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 1060,
-      "timestamp": "2025-07-01T14:08:24.059Z"
-    },
-    {
-      "id": "77d18185-143b-4254-8359-1694060008cf",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 2000,
-      "timestamp": "2025-07-01T14:10:39.888Z"
-    },
-    {
-      "id": "c9c28e4a-6597-46d3-8b15-2f625ae09efd",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 20010,
-      "timestamp": "2025-07-01T14:11:01.639Z"
-    },
-    {
-      "id": "9fa2a278-d5d6-426a-92f2-86781cd5d355",
-      "auctionId": "1",
-      "userId": "1",
-      "amount": 20011,
-      "timestamp": "2025-07-01T14:11:25.321Z"
-    },
-    {
-      "id": "0f4ee86c-77a2-4c2e-bcaf-36a5ad59e13f",
-      "auctionId": "1",
-      "userId": "1",
-      "amount": 20012,
-      "timestamp": "2025-07-01T14:24:58.801Z"
-    },
-    {
-      "id": "68e64c36-79fd-45eb-8a48-e8fd2d1140d6",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 20013,
-      "timestamp": "2025-07-01T14:25:09.696Z"
     }
   ]
 }
