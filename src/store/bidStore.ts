@@ -16,7 +16,7 @@ export const useBidStore = create<BidStore>((set) => ({
     try {
       const data = await getBids(auctionId);
       const enrichedBids = await Promise.all(
-        data.map(async (bid : Bid) => {
+        data.map(async (bid: Bid) => {
           try {
             const user = await getUserById(bid.userId);
             return {
@@ -39,6 +39,11 @@ export const useBidStore = create<BidStore>((set) => ({
       console.error("Error fetching bids", error);
     }
   },
-  addBid: (bid) => set((state) => ({ bids: [...state.bids, bid] })),
+  addBid: (newBid) =>
+    set((state) => {
+      const exists = state.bids.some((b) => b.id === newBid.id);
+      if (exists) return state;
+      return { bids: [...state.bids, newBid] };
+    }),
   clearBids: () => set({ bids: [] }),
 }));

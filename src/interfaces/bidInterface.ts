@@ -7,5 +7,6 @@ export interface Bid {
     user?: {
         id: string;
         name: string;
+        photoUrl?: string;
     };
 }

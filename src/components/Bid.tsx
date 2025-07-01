@@ -12,6 +12,7 @@ import { BidCardUser } from "./BidCardUser";
 import { CustomAlert } from "./CustomAlert";
 import { useAuctionStore } from "../store/auctionStore";
 import type { Bid } from "../interfaces/bidInterface";
+import { getUserById } from "../services/Users";
 
 export function Bid() {
   const [alert, setAlert] = useState({
@@ -25,7 +26,8 @@ export function Bid() {
   const fetchBids = useBidStore((state) => state.fetchBids);
   const addBid = useBidStore((state) => state.addBid);
   const user = useAuthStore((state) => state.user);
-  const highestBid = Math.max(0, ...bids.map((b) => b.amount));
+  const base = selectedAuction?.basePrice || 0;
+  const highestBid = Math.max(base, ...bids.map((b) => b.amount));
   const BidSchema = Yup.object({
     amount: Yup.number()
       .required(t("Validation.bidrequired"))
@@ -94,13 +96,23 @@ export function Bid() {
   useEffect(() => {
     const eventSource = new EventSource("http://localhost:5001/events");
 
-    eventSource.onmessage = (event) => {
+    eventSource.onmessage = async (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.tipo === "newbid") {
-          if (data.puja.auctionId === auctionId) {
-            addBid(data.puja);
+
+        if (data.tipo === "newbid" && data.puja.auctionId === auctionId) {
+          const bid = data.puja;
+
+          if (!bid.user) {
+            const response = await getUserById(bid.userId);
+            bid.user = {
+              id: response.id,
+              name: response.name,
+              photoUrl: response.photoUrl || "",
+            };
           }
+
+          addBid(bid);
         }
       } catch (error) {
         console.error("Error parsing SSE message", error);

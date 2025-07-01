@@ -9,10 +9,22 @@ import {
 } from "@mui/material";
 import { t } from "i18next";
 import { useAuctionStore } from "../store/auctionStore";
+import { useBidStore } from "../store/bidStore";
 import { AuctionTimer } from "./Timer";
+import { useEffect } from "react";
 
 export const AuctionDetails = () => {
-  const { selectedAuction } = useAuctionStore();
+  const { selectedAuction, setSelectedAuction } = useAuctionStore();
+  const bids = useBidStore((state) => state.bids);
+
+  const highestBid = Math.max(0, ...bids.map((b) => b.amount));
+
+  useEffect(() => {
+    if (selectedAuction && selectedAuction.currentBid !== highestBid) {
+      setSelectedAuction({ ...selectedAuction, currentBid: highestBid });
+    }
+  }, [bids, selectedAuction]);
+
   if (!selectedAuction) {
     return (
       <Container
@@ -30,6 +42,7 @@ export const AuctionDetails = () => {
       </Container>
     );
   }
+
   return (
     <Container
       maxWidth="md"

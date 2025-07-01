@@ -30,9 +30,9 @@
       "description": "Patito de hule que te ayudara a ser el mejor programador.",
       "basePrice": 500,
       "currentBid": 500,
-      "startTime": "2025-07-01T10:25:00.000Z",
+      "startTime": "2025-07-01T12:17:00.000Z",
       "duration": 300,
-      "status": "finished"
+      "status": "actual"
     },
     {
       "id": "2",
@@ -63,8 +63,8 @@
       "image": "src/assets/impresora.jpg",
       "description": "No imprime, pero es buena tipa, puede escanear.",
       "basePrice": 100,
-      "currentBid": 0,
-      "startTime": "2025-06-29T12:00:00Z",
+      "currentBid": 100,
+      "startTime": "2025-07-01T12:13:00.000Z",
       "duration": 300,
       "status": "finished"
     },
@@ -81,26 +81,6 @@
     }
   ],
   "bids": [
-    {
-      "id": "b1",
-      "auctionId": "1",
-      "userId": "2",
-      "amount": 1000,
-      "timestamp": "2025-06-29T14:01:00Z"
-    },
-    {
-      "id": "b3",
-      "auctionId": "3",
-      "userId": "3",
-      "amount": 900,
-      "timestamp": "2025-06-28T12:01:00Z"
-    },
-    {
-      "id": "b4",
-      "auctionId": "3",
-      "userId": "1",
-      "amount": 950,
-      "timestamp": "2025-06-28T12:04:00Z"
-    }
+    
   ]
 }
