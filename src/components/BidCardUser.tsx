@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import type { Bid } from "../interfaces/bidInterface";
 
-export const BidCardUser = (bid: Bid) => {
-  if (!bid || !bid.user) {
-    return null;
-  }
+interface BidCardUserProps {
+  bid: Bid;
+}
+export const BidCardUser = ({ bid }: BidCardUserProps) => {
   return (
     <Box
       sx={{
@@ -15,10 +15,12 @@ export const BidCardUser = (bid: Bid) => {
         backgroundColor: "#f9f9f9",
       }}
     >
-      <Typography variant="h6">{bid.user.name}</Typography>
-      <Typography variant="body2">Amount: ${bid.amount}</Typography>
+      <Typography variant="h6">
+        {bid.user?.name || "Usuario anónimo"}
+      </Typography>
+      <Typography variant="body2">Monto: ${bid.amount}</Typography>
       <Typography variant="body2">
-        Timestamp: {new Date(bid.timestamp).toLocaleString()}
+        Fecha: {new Date(bid.timestamp).toLocaleString()}
       </Typography>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBidStore } from "../store/bidStore";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
@@ -8,7 +8,7 @@ import { useAuthStore } from "../store/authStore";
 import { createBid } from "../services/BidServices";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { BidCard } from "./BidCardUser";
+import { BidCardUser } from "./BidCardUser";
 import { CustomAlert } from "./CustomAlert";
 import { useAuctionStore } from "../store/auctionStore";
 import type { Bid } from "../interfaces/bidInterface";
@@ -40,39 +40,82 @@ export function Bid() {
     },
   });
 
-  const renderBidCard = useCallback((bid : Bid) => (
-  <BidCard key={bid.id} bid={bid} />
-), []);
+  const renderBidCard = (bid: Bid) => <BidCardUser key={bid.id} bid={bid} />;
 
-  const handleSubmitBid = useCallback(async (amount: number, auctionId: string) => {
-  const bidToSend = {
-    id: uuidv4(),
-    auctionId,
-    userId: user.id,
-    amount,
-    timestamp: new Date(),
+  const handleSubmitBid = async (amount: number, auctionId: string) => {
+    const bidToSend = {
+      id: uuidv4(),
+      auctionId,
+      userId: user.id,
+      amount,
+      timestamp: new Date(),
+    };
+
+    try {
+      const savedBid = await createBid(bidToSend);
+
+      const completeBid = {
+        ...savedBid,
+        user: {
+          id: user.id,
+          name: user.name,
+          photoUrl: user.photoUrl || "",
+        },
+      };
+
+      addBid(completeBid);
+
+      setAlert({
+        open: true,
+        message: t("Bid.successMessage"),
+        severity: "success",
+      });
+
+      return true;
+    } catch (err) {
+      console.error("Error submitting bid:", err);
+
+      setAlert({
+        open: true,
+        message: t("Bid.errorMessage: " + err) || "Error al enviar la puja",
+        severity: "error",
+      });
+
+      return false;
+    }
   };
 
-  try {
-    const savedBid = await createBid(bidToSend);
-    addBid({ ...savedBid, user: { id: user.id, name: user.name } });
-    setAlert({
-      open: true,
-      message: t("Bid.successMessage"),
-      severity: "success",
-    });
-  } catch (err) {
-    setAlert({
-      open: true,
-      message: t("Bid.errorMessage") || "Error al enviar la puja.",
-      severity: "error",
-    });
-  }
-}, [user.id, user.name, addBid]);
+  useEffect(() => {
+    if (auctionId) {
+      fetchBids(auctionId);
+    }
+  }, [auctionId]);
 
   useEffect(() => {
-    if (auctionId) fetchBids(auctionId);
-  }, [auctionId]);
+    const eventSource = new EventSource("http://localhost:5001/events");
+
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.tipo === "newbid") {
+          if (data.puja.auctionId === auctionId) {
+            addBid(data.puja);
+          }
+        }
+      } catch (error) {
+        console.error("Error parsing SSE message", error);
+      }
+    };
+
+    eventSource.onerror = (err) => {
+      console.error("SSE connection error", err);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, [addBid, auctionId]);
 
   return (
     <Container
@@ -118,7 +161,11 @@ export function Bid() {
             disabled={selectedAuction?.status !== "actual"}
           />
         </Box>
-        <Button type="submit" variant="contained" disabled={selectedAuction?.status !== "actual"}>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={selectedAuction?.status !== "actual"}
+        >
           {t("Bid.submit")}
         </Button>
       </form>

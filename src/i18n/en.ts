@@ -90,5 +90,6 @@ export const enJSON = {
         noBids: "No bids available for this auction",
         submit: "Submit Bid",
         succesed: "Bid placed successfully",
+        errorMessage: "Error placing bid, please try again",
     }
 };

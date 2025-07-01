@@ -91,5 +91,6 @@ export const esJSON = {
         noBids: "No hay pujas disponibles para esta sub",
         submit: "Enviar Puja",
         successMessage: "Puja realizada exitosamente",
+        errorMessage: "Error al realizar la puja, por favor intente nuevamente"
     }
 };

@@ -30,9 +30,9 @@
       "description": "Patito de hule que te ayudara a ser el mejor programador.",
       "basePrice": 500,
       "currentBid": 500,
-      "startTime": "2025-06-30T12:16:00.000Z",
+      "startTime": "2025-07-01T10:25:00.000Z",
       "duration": 300,
-      "status": "finished"
+      "status": "actual"
     },
     {
       "id": "2",
@@ -43,7 +43,7 @@
       "currentBid": 450,
       "startTime": "2025-06-30T12:25:00.000Z",
       "duration": 600,
-      "status": "actual"
+      "status": "finished"
     },
     {
       "id": "3",
@@ -66,6 +66,17 @@
       "currentBid": 0,
       "startTime": "2025-06-29T12:00:00Z",
       "duration": 300,
+      "status": "finished"
+    },
+    {
+      "id": "0669aa98-79f7-4c2a-90b4-89edaf7880cf",
+      "title": "Camiseta de Programador",
+      "image": "src/assets/camiseta.jpg",
+      "description": "Camiseta con el logo de tu lenguaje favorito.",
+      "basePrice": 100,
+      "currentBid": 300,
+      "startTime": "2025-06-30T17:00:00Z",
+      "duration": 600,
       "status": "finished"
     }
   ],
@@ -99,67 +110,60 @@
       "timestamp": "2025-06-28T12:04:00Z"
     },
     {
-      "id": "f84ae8e7-c6a3-4d2c-92be-60feaf07f5e5",
+      "id": "10757243-adbf-469d-a934-9a8b21c655b3",
       "auctionId": "1",
-      "userId": "1",
+      "userId": "2",
       "amount": 1051,
-      "timestamp": "2025-06-30T16:03:17.568Z"
+      "timestamp": "2025-07-01T14:06:56.590Z"
     },
     {
-      "id": "fc99bc48-b238-4a27-804b-69d36795f047",
+      "id": "fc4c0218-8c2d-4636-8821-ac2d2d35f2a4",
       "auctionId": "1",
       "userId": "1",
       "amount": 1052,
-      "timestamp": "2025-06-30T16:03:29.157Z"
+      "timestamp": "2025-07-01T14:07:03.043Z"
     },
     {
-      "id": "830e926e-709d-409a-a7bc-43779713c843",
-      "auctionId": "2",
-      "userId": "1",
-      "amount": 100,
-      "timestamp": "2025-06-30T16:11:36.916Z"
+      "id": "a17728c8-7f55-49c9-9d53-6d765e36c325",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 1060,
+      "timestamp": "2025-07-01T14:08:24.059Z"
     },
     {
-      "id": "79efb44a-f3c7-437c-a85a-5baa585f7a41",
-      "auctionId": "2",
-      "userId": "1",
-      "amount": 450,
-      "timestamp": "2025-06-30T16:11:41.000Z"
+      "id": "77d18185-143b-4254-8359-1694060008cf",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 2000,
+      "timestamp": "2025-07-01T14:10:39.888Z"
     },
     {
-      "id": "1cbefc32-a2ec-42a5-a6d2-675aaa59b60d",
-      "auctionId": "2",
-      "userId": "1",
-      "amount": 500,
-      "timestamp": "2025-06-30T16:11:44.845Z"
+      "id": "c9c28e4a-6597-46d3-8b15-2f625ae09efd",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 20010,
+      "timestamp": "2025-07-01T14:11:01.639Z"
     },
     {
-      "id": "338b99cd-95aa-4eb0-b928-34c943bfecf2",
-      "auctionId": "2",
+      "id": "9fa2a278-d5d6-426a-92f2-86781cd5d355",
+      "auctionId": "1",
       "userId": "1",
-      "amount": 550,
-      "timestamp": "2025-06-30T16:23:09.693Z"
+      "amount": 20011,
+      "timestamp": "2025-07-01T14:11:25.321Z"
     },
     {
-      "id": "ad1da50a-7186-479a-bbfc-6418ccbe08a1",
-      "auctionId": "2",
+      "id": "0f4ee86c-77a2-4c2e-bcaf-36a5ad59e13f",
+      "auctionId": "1",
       "userId": "1",
-      "amount": 600,
-      "timestamp": "2025-06-30T16:23:15.025Z"
+      "amount": 20012,
+      "timestamp": "2025-07-01T14:24:58.801Z"
     },
     {
-      "id": "e718b2a8-eccd-4cde-b319-dc9eee5911bc",
-      "auctionId": "2",
-      "userId": "1",
-      "amount": 601,
-      "timestamp": "2025-06-30T16:25:39.441Z"
-    },
-    {
-      "id": "dcc505fb-bbd2-4509-a69a-3a98ce67af9c",
-      "auctionId": "2",
-      "userId": "1",
-      "amount": 602,
-      "timestamp": "2025-06-30T16:29:26.525Z"
+      "id": "68e64c36-79fd-45eb-8a48-e8fd2d1140d6",
+      "auctionId": "1",
+      "userId": "2",
+      "amount": 20013,
+      "timestamp": "2025-07-01T14:25:09.696Z"
     }
   ]
 }
