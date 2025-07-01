@@ -11,3 +11,4 @@ Los usuarios registrados pueden realizar ofertas en tiempo real y visualizar los
 # Índice de documentos
 - [Instalación del proyecto](https://github.com/valeriaZerain/subastas-proyecto-final/blob/main/docs/Instalacion.md)
 - [Funcionalidades](https://github.com/valeriaZerain/subastas-proyecto-final/blob/main/docs/Funcionalidades.md)
+
